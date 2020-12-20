@@ -1,29 +1,23 @@
-class Pig {
+class Pig extends Baseclass{
+
     constructor(x,y){
-
-       var abc = {
-           restitution:1,
-           density:1,
-           friction:1
-       }
-
-        this.body = Bodies.rectangle(x,y,50,50,abc);
-        this.width = 50;
-        this.height = 50;
-        World.add(myWorld,this.body);
+      super(x,y,70,70);
+      this.image = loadImage("sprites/enemy.png");
+      this.Visiblity=255;
     }
 
     display(){
-
-       var pos = this.body.position;
-       var angle = this.body.angle;
+      if(this.body.speed<2){
+      super.display();
+      }
+    
+     else{
+       World.remove(myWorld,this.body);
        push();
-       translate(pos.x,pos.y);
-       rotate(angle);
-
-       fill("green");
-       rectMode(CENTER);
-       rect(0,0,this.width,this.height);
+       this.Visiblity=this.Visiblity-5;
+       tint(255,this.Visiblity);
+       image(this.image,this.body.position.x,this.body.position.y,70,70);
        pop();
+     }
     }
 }
